@@ -1,8 +1,5 @@
 package com.iu.board.notice;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.iu.board.BoardDAO;
 import com.iu.board.BoardDTO;
-import com.iu.util.DBConnector;
 import com.iu.util.Pager;
 
 @Repository

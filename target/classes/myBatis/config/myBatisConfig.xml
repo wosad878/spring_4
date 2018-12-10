@@ -9,5 +9,6 @@
   		<typeAlias type="com.iu.board.qna.QnaDTO" alias="QnaDTO"/>
   		<typeAlias type="com.iu.board.BoardDTO" alias="BoardDTO"/>
   		<typeAlias type="com.iu.util.Pager" alias="Pager"/>
+  		<typeAlias type="com.iu.member.MemberDTO" alias="MemberDTO" />
   	</typeAliases>
   </configuration>
