@@ -17,5 +17,4 @@ public interface BoardDAO {
 	public int delete(int num) throws Exception;
 	//totalCount
 	public int totalCount(Pager pager) throws Exception;
-	
 }
