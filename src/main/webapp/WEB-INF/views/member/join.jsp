@@ -6,71 +6,55 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
 <script type="text/javascript">
-	function check(){
-		var id = $("#id").val();
-		window.open("./idCheck?id="+id,"","height=300,width=300");
-	}
-	function cancle(){
-		history.back();
-	}
+$(function() {
+	var check = false;
+	
+	$("#id").change(function(){
+		check = false;
+	});
+	
+	$("#id").blur(function(){
+		var id = $(this).val();
+		$.get("./idCheck?id="+id, function(result){
+			result = result.trim();
+			var msg = "사용 할 수 없는 ID";
+			if(result != 0){
+				msg = "사용 가능 한 ID";
+				check = true;
+			} 
+			$("#result").html(msg);
+		});
+		
+	});
+	
+	$("#btn").click(function(){
+		if(check == true){
+			$("#frm").submit();
+		} else{
+			alert("중복확인 하세요");
+		}
+	});
 	var msg = '${msg}';
 	if(msg != ""){
-	alert(msg);
+		alert(msg);
 	}
+});
+
 </script>
 </head>
 <body>
 	<h2>Member Join</h2>
-	<form action="./join" method="post">
-		<table>
-			<tr>
-				<td>
-					<label>id</label>
-					<input type="text" id="id" name="id">
-					<input type="button" value="중복확인" onclick="check()">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>pw</label>
-					<input type="text" name="pw">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>pw2</label>
-					<input type="text">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>name</label>
-					<input type="text" name="name">
-				</td>
-			</tr>
-				<tr>
-				<td>
-					<label>email</label>
-					<input type="email" name="email">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>phone</label>
-					<input type="text" name="phone">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>addr</label>
-					<input type="text" name="addr">
-				</td>
-			</tr>
-		</table>
-			<button>확인</button>
-			<input type="button" value="취소" onclick="cancle()">
+	<form id="frm" action="./join" method="post">
+		<p>ID : <input type="text" name="id" id="id"></p>
+		<p id="result"></p>
+		<p>PW : <input type="password" name="pw"></p>
+		<p>NAME : <input type="text" name="name"></p>
+		<p>EMAIL : <input type="email" name="email"></p>
+		<p>PHONE : <input type="text" name="phone"></p>
+		<p>ADDRESS : <input type="text" name="addr"></p>
+		<input type="button" value="join" id="btn">
 	</form>
 </body>
 </html>

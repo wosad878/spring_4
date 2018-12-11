@@ -21,13 +21,17 @@
 	<a href="./qna/qnaList">QnaList</a>
 	<a href="./notice/noticeList">NoticeList</a>
 	<c:choose>
-		<c:when test="${member.id != null}">
-			<a href="./member/myPage">MyPage</a>
-			<a href="./member/logout">logout</a>
+		<c:when test="${not empty member}">
+			<p>
+				<a href="./member/myPage">MyPage</a>
+				<a href="./member/logout">logOut</a>
+			</p>
 		</c:when>
 		<c:otherwise>
-			<a href="./member/join">join</a>
-			<a href="./member/login">login</a>
+			<p>
+				<a href="./member/join">join</a>
+				<a href="./member/login">login</a>
+			</p>
 		</c:otherwise>
 	</c:choose>
 </body>

@@ -13,9 +13,10 @@ alert(msg);
 </script>
 </head>
 <body>
+	<H1>Login Page</H1>
 	<form action="./login" method="post">
-		id : <input type="text" name="id">
-		pw : <input type="text" name="pw">
+		<p>id : <input type="text" name="id"></p>
+		<p>pw : <input type="password" name="pw"></p>
 		<button>확인</button>
 	</form>
 </body>

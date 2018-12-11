@@ -16,37 +16,41 @@ public class NoticeDAO implements BoardDAO {
 	
 	@Inject
 	private SqlSession session;
-	private String namespace="noticeMapper.";
+	private static final String NAMESPACE="noticeMapper.";
+	
+	public int getNum() throws Exception {
+		return session.selectOne(NAMESPACE+"getNum");
+	}
 	
 	@Override
 	public int totalCount(Pager pager) throws Exception {
-		return session.selectOne(namespace+"totalCount", pager);
+		return session.selectOne(NAMESPACE+"totalCount", pager);
 	}
 	
 	@Override
 	public List<BoardDTO> list(Pager pager) throws Exception {
-		return session.selectList(namespace + "selectList", pager);
+		return session.selectList(NAMESPACE + "selectList", pager);
 	}
 
 	@Override
 	public BoardDTO select(int num) throws Exception {
-		return session.selectOne(namespace+"selectOne", num);
+		return session.selectOne(NAMESPACE+"selectOne", num);
 	}
 
 	@Override
 	public int insert(BoardDTO boardDTO) throws Exception {
-		return session.insert(namespace+"insert", boardDTO);
+		return session.insert(NAMESPACE+"insert", boardDTO);
 	}
 
 	@Override
 	public int update(BoardDTO boardDTO) throws Exception {
-		return session.update(namespace+"update", boardDTO);
+		return session.update(NAMESPACE+"update", boardDTO);
 	}
 
 	@Override
 	public int delete(int num) throws Exception {
 	
-		return session.delete(namespace+"delete", num);
+		return session.delete(NAMESPACE+"delete", num);
 	}
 
 }

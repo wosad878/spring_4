@@ -23,8 +23,10 @@
 	
 	<context:component-scan base-package="com.iu.s4" />
 	<context:component-scan base-package="com.iu.member" />
+	<context:component-scan base-package="com.iu.board" />
 	<context:component-scan base-package="com.iu.board.notice" />
 	<context:component-scan base-package="com.iu.board.qna" />
-	
+	<context:component-scan base-package="com.iu.util" />
+	<context:component-scan base-package="com.iu.file" />
 	
 </beans:beans>

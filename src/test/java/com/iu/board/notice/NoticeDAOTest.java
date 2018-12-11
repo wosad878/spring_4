@@ -13,22 +13,27 @@ import org.junit.Test;
 
 import com.iu.board.BoardDTO;
 import com.iu.s4.AbstractTestCase;
+import com.iu.s4.NoticeController;
 import com.iu.util.Pager;
 
 public class NoticeDAOTest extends AbstractTestCase {
 	@Inject
 	private NoticeDAO noticeDAO;
-	@Test
-	public void test() {
-		try {
-			int result = noticeDAO.delete(31);
-			assertEquals(1, result);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+	@Inject
+	private NoticeController nc;
+	
+	
+//	@Test
+//	public void test() {
+//		try {
+//			int result = noticeDAO.delete(31);
+//			assertEquals(1, result);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//	}
 //	@Test
 //	public void test() {
 //		NoticeDTO noticeDTO = new NoticeDTO();
