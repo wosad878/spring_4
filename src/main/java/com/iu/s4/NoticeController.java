@@ -32,10 +32,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="noticeSelect")
-	public String select(int num, Model model) throws Exception {
-		BoardDTO boardDTO = noticeService.select(num);
-		model.addAttribute("board", "notice").addAttribute("boardDTO",boardDTO);
-		return "board/boardSelect";
+	public String select(int num, Model model, RedirectAttributes rd) throws Exception {
+		String path = noticeService.select(num, model, rd);
+		return path;
 	}
 	
 	@RequestMapping(value="noticeWrite", method=RequestMethod.GET)

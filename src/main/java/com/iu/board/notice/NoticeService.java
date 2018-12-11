@@ -1,14 +1,15 @@
 package com.iu.board.notice;
 
 
-import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.iu.board.BoardDTO;
 import com.iu.board.BoardService;
@@ -32,7 +33,27 @@ public class NoticeService implements BoardService {
 	}
 	
 	public BoardDTO select(int num) throws Exception {
+		FileDTO fileDTO = new FileDTO();
+		fileDTO.setNum(num);
+		fileDTO.setKind("n");
+		List<FileDTO> files = fileDAO.list(fileDTO);
 		return noticeDAO.select(num);
+	}
+	public String select(int num, Model model,RedirectAttributes rd) throws Exception {
+		FileDTO fileDTO = new FileDTO();
+		fileDTO.setNum(num);
+		fileDTO.setKind("n");
+		List<FileDTO> files = fileDAO.list(fileDTO);
+		BoardDTO boardDTO = noticeDAO.select(num);
+		String path = "";
+		if(boardDTO != null) {
+			model.addAttribute("dto", boardDTO).addAttribute("files",files);
+			path = "board/boardSelect";
+		}else {
+			rd.addFlashAttribute("msg", "해당 글은 없습니다");
+			path = "./notice/noticeList";
+		}
+		return path;
 	}
 	@Override
 	public int insert(BoardDTO boardDTO) {
