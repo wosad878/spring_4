@@ -14,8 +14,11 @@
   	<update id="update" parameterType="NoticeDTO">
   		update notice set title=#{title}, contents=#{contents} where num=#{num}
   	</update>
-  	<insert id="insert" parameterType="NoticeDTO">
-  		insert into notice values(#{num},#{title},#{writer},#{contents},sysdate,0)
+  	<insert id="insert" parameterType="java.util.Map">
+  		<selectKey keyProperty="num" resultType="int" order="BEFORE">
+  			select notice_seq.nextval from dual
+  		</selectKey>
+  		insert into notice values(#{num},#{noticeDTO.title},#{noticeDTO.writer},#{noticeDTO.contents},sysdate,0)
   	</insert>
   	<select id="selectOne" parameterType="java.lang.Integer" resultType="NoticeDTO">
   		select * from notice where num=#{num}

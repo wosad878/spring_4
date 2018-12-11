@@ -1,6 +1,7 @@
 package com.iu.board.notice;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,6 +18,11 @@ public class NoticeDAO implements BoardDAO {
 	@Inject
 	private SqlSession session;
 	private static final String NAMESPACE="noticeMapper.";
+	
+	public void test(Map<String, Object> map) throws Exception {
+		session.insert(NAMESPACE+"insert", map);
+	}
+	
 	
 	public int getNum() throws Exception {
 		return session.selectOne(NAMESPACE+"getNum");

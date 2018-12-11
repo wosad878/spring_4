@@ -60,28 +60,21 @@ public class NoticeService implements BoardService {
 		return 0;
 	}
 	
-	public int insert(BoardDTO boardDTO, MultipartFile [] f1, HttpSession session) throws Exception {
+	public int insert(BoardDTO boardDTO, MultipartFile f1, HttpSession session) throws Exception {
 		FileSaver fs = new FileSaver();
 		String realPath = session.getServletContext().getRealPath("resources/notice");
-		int num = noticeDAO.getNum();
-		boardDTO.setNum(num);
+		FileDTO fileDTO = new FileDTO();
+		fileDTO.setOname(f1.getOriginalFilename());
+		fileDTO.setFname(fs.saveFile3(realPath, f1));
+		fileDTO.setKind("n");
+
 		int result = noticeDAO.insert(boardDTO);
 		if(result < 1) {
 			throw new Exception();
 		}
-		for(MultipartFile mFile: f1) {
-			if(mFile.isEmpty()) {
-				continue;
-			}
-			FileDTO fileDTO = new FileDTO();
-			fileDTO.setOname(mFile.getOriginalFilename());
-			fileDTO.setFname(fs.saveFile3(realPath, mFile));
-			fileDTO.setKind("n");
-			fileDTO.setNum(num);
-			result = fileDAO.insert(fileDTO);
-			if(result < 1) {
-				throw new Exception();
-			}
+		result = fileDAO.insert(fileDTO);
+		if(result < 1) {
+			throw new Exception();
 		}
 		return result;
 	}
